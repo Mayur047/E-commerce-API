@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: 3.12  # ✅ Updated to Python 3.12
 
       - name: Install dependencies
         run: |
@@ -27,18 +27,16 @@ jobs:
         run: |
           pytest --junitxml=report.xml --html=report.html
 
-      - name: Check if reports were generated
-        run: |
-          ls -l report.*
-
       - name: Upload JUnit test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: junit-report
           path: report.xml
+          if-no-files-found: ignore  # optional
 
       - name: Upload HTML test report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: html-report
           path: report.html
+          if-no-files-found: ignore  # optional
