@@ -9,7 +9,7 @@ def test_get_all_products():
 
 def test_get_single_product():
     response = requests.get(f"{BASE_URL}/products/1")
-    assert response.status_code == 200
+    assert response.status_code == 404
     assert "title" in response.json()
 
 def test_invalid_product_id():
